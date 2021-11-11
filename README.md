@@ -1,2 +1,3 @@
 # PDS
-TADS - Projeto de Desenvolvimento de Sistemas (Gerenciador de Acessos)
+
+TADS | Gerenciador de Acessos | Projeto de Desenvolvimento de Sistemas
