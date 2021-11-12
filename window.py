@@ -12,7 +12,7 @@ def btn_register():
     userPass = entry1.get()
 
     if userName is "":
-        messagebox.showerror("Erro","Informar usuário")
+        messagebox.showerror("Erro","Informar usuário!")
     elif ' ' in userName:
         messagebox.showwarning("Usuário Inválido", "Usuário não deve conter espaços")
     elif not userName.isalnum():
