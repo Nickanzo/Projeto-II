@@ -184,6 +184,8 @@ def btn_login():
                 messagebox.showinfo("Sucesso","Login com Sucesso")
                 loginWindow.destroy()
                 userScr(userName)
+        else:
+            messagebox.showerror("Erro", "Usuário não cadastrado")
 
 #Registrar novo usuário
 def btn_register():
