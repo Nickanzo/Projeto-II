@@ -1,6 +1,8 @@
+import tkinter as tk
 from tkinter import *
+from tkinter.ttk import *
 from tkinter import messagebox, Button
-from BackEnd.modelo import validaUser, cadastraUser, login, validaBD
+from BackEnd.modelo import validaUser, cadastraUser, login, validaBD, resgataLogins, resgataUserID
 
 
 def limitSizeUser(*args):
@@ -34,7 +36,35 @@ def userScr(name):
     bg = canvas.create_image(450, 250, image=bg_img)
 
     welcomeUser = "Welcome " + name
-    welcomeText = canvas.create_text(140, 50, text=welcomeUser, font=("Ubuntu", 24),fill="white")
+    textLen = len(welcomeUser) + 200
+    welcomeText = canvas.create_text(
+        textLen,
+        50,
+        text=welcomeUser,
+        font=("Arial", 20),
+        fill="white",
+        justify=tk.RIGHT
+    )
+
+    logins = resgataLogins(resgataUserID(name))
+
+    addLogBtn = Button(
+        userWindow,
+        text = "Novo Acesso",
+        width = 15,
+        height = 5,
+        command=btnAddLogin,
+        relief = "ridge",
+        activebackground = "#345",
+    )
+
+    addLogBtn.place(
+        x=20,
+        y=120,
+    )
+
+    print(logins)
+    # if logins == 0
 
     userWindow.resizable(False, False)
     userWindow.mainloop()
@@ -65,7 +95,7 @@ def loginScr():
     userName.trace("w", limitSizeUser)
 
     global textBoxUser
-    textBoxUser = Entry(
+    textBoxUser = tk.Entry(
         bd=0,
         bg="#c7c3f9",
         highlightthickness=0,
@@ -86,7 +116,7 @@ def loginScr():
     userPass.trace("w", limitSizePass)
 
     global textBoxPass
-    textBoxPass = Entry(
+    textBoxPass = tk.Entry(
         bd=0,
         bg="#c7c3f9",
         highlightthickness=0,
@@ -155,7 +185,7 @@ def btn_login():
                 loginWindow.destroy()
                 userScr(userName)
 
-
+#Registrar novo usuário
 def btn_register():
     userName = textBoxUser.get()
     userPass = textBoxPass.get()
@@ -169,6 +199,17 @@ def btn_register():
             messagebox.showerror("Erro!", "Usuário já existe no sistema!")
 
 
+def btnAddLogin():
+
+    addWebLogin = tk.Tk()
+    addWebLogin.title("Adiciona novo Site")
+    addWebLogin.geometry("300x400")
+
+    addWebLogin.resizable(False, False)
+    # addWebLogin.mainloop()
+
+
+#Valida campos de Login
 def valida_campos(user,senha):
     if user == "":
         messagebox.showerror("Erro","Informar usuário!")
@@ -181,3 +222,4 @@ def valida_campos(user,senha):
     else:
         return True
     return False
+
